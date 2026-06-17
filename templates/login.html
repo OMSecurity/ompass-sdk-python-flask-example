@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('login.title') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- i18n data for JavaScript -->
+<div id="i18n-data" style="display:none"
+     data-username-required="{{ _('login.error.username.required') }}"
+     data-checking="{{ _('login.checking') }}"
+     data-next="{{ _('login.next') }}"
+     data-popup-blocked="{{ _('login.error.popup.blocked') }}"
+     data-ompass-start-fail="{{ _('login.error.ompass.start') }}">
+</div>
+
+<!-- DEMO Banner -->
+<div class="top-bar">
+    <div class="top-bar-inner">
+        <span class="demo-badge">DEMO</span>
+        <span>{{ _('common.demo.banner') }}</span>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <span class="logo-text">DemoMail</span>
+        </a>
+        <div class="lang-switcher">
+            <a href="?lang=ko">한국어</a>
+            <a href="?lang=en">EN</a>
+            <a href="?lang=ja">日本語</a>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="container">
+
+        <div class="login-content-box" style="max-width: 480px; margin: 0 auto;">
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">{{ message }}</div>
+            {% endfor %}
+            {% endwith %}
+
+            <form id="login-form" action="/auth/login" method="post" class="login-form active">
+
+                <!-- Step 1: Username -->
+                <div id="step1">
+                    <div class="form-header-row" style="text-align: center;">
+                        <span class="logo-text" style="font-size: 28px;">DemoMail</span>
+                        <h2 style="margin-top: 16px;">{{ _('login.heading') }}</h2>
+                        <p class="form-desc">{{ _('login.step1.desc') }}</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="username1">{{ _('login.username.label') }}</label>
+                        <input type="text" id="username1" name="username" placeholder="{{ _('login.username.placeholder') }}" autocomplete="username" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-block btn-next" onclick="checkUserAndProceed()">{{ _('login.next') }}</button>
+                    </div>
+                    <div class="form-links">
+                        <span>{{ _('login.no.account') }}</span>
+                        <a href="/register" class="link">{{ _('common.register') }}</a>
+                    </div>
+                </div>
+
+                <!-- Step 2: Password (for non-OMPASS users) -->
+                <div id="step2" style="display:none">
+                    <div class="form-header-row" style="text-align: center;">
+                        <span class="logo-text" style="font-size: 28px;">DemoMail</span>
+                        <h2 style="margin-top: 16px;">{{ _('login.step2.heading') }}</h2>
+                    </div>
+                    <div style="background: #f8f9fa; border: 1px solid #e8eaed; border-radius: 8px; padding: 10px 14px; margin-bottom: 20px; font-size: 14px; color: #202124;">
+                        <span id="step2-username"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">{{ _('login.password.label') }}</label>
+                        <input type="password" id="password1" name="password" placeholder="{{ _('login.password.placeholder') }}" autocomplete="current-password">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">{{ _('login.submit') }}</button>
+                    </div>
+                    <div class="form-links">
+                        <a href="javascript:void(0)" class="link" onclick="resetStep1()"><span>&larr; {{ _('login.back') }}</span></a>
+                    </div>
+                </div>
+
+                <!-- Step OMPASS: Waiting for OMPASS authentication -->
+                <div id="step-ompass" style="display:none">
+                    <div class="form-header-row" style="text-align: center;">
+                        <span class="logo-text" style="font-size: 28px;">DemoMail</span>
+                        <h2 style="margin-top: 16px;">{{ _('login.ompass.heading') }}</h2>
+                    </div>
+                    <div style="background: #f8f9fa; border: 1px solid #e8eaed; border-radius: 8px; padding: 10px 14px; margin-bottom: 20px; font-size: 14px; color: #202124;">
+                        <span id="ompass-username"></span>
+                    </div>
+                    <div class="ompass-popup-section">
+                        <div class="status-waiting">
+                            <div class="spinner" aria-hidden="true"></div>
+                            <p>{{ _('login.ompass.waiting') }}</p>
+                            <p class="form-desc" style="margin-top: 8px; color: #80868b;">{{ _('login.ompass.timeout') }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 24px;">
+                        <button type="button" class="btn btn-ompass btn-block" onclick="retryOmpassAuth()">{{ _('login.ompass.retry') }}</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary btn-block" onclick="resetStep1()">{{ _('login.ompass.cancel') }}</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <p style="font-size: 12px; color: #80868b; text-align: center;">DemoMail - OMPASS SDK Example | &copy; 2025</p>
+    </div>
+</footer>
+
+<script>
+    const i18n = document.getElementById('i18n-data').dataset;
+    let ompassPopup = null;
+    let currentUsername = '';
+
+    async function checkUserAndProceed() {
+        const username = document.getElementById('username1').value.trim();
+        if (!username) {
+            alert(i18n.usernameRequired);
+            document.getElementById('username1').focus();
+            return;
+        }
+
+        const nextBtn = document.querySelector('#step1 .btn-next');
+        nextBtn.textContent = i18n.checking;
+        nextBtn.disabled = true;
+
+        try {
+            const formData = new FormData();
+            formData.append('username', username);
+
+            const response = await fetch('/auth/check-user', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+
+            currentUsername = username;
+
+            if (data.ompassRegistered) {
+                startOmpassAuth(username);
+            } else {
+                showPasswordStep(username);
+            }
+        } catch (error) {
+            alert(error.message);
+            nextBtn.textContent = i18n.next;
+            nextBtn.disabled = false;
+        }
+    }
+
+    async function startOmpassAuth(username) {
+        const formData = new FormData();
+        formData.append('username', username);
+
+        try {
+            const response = await fetch('/auth/start', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+
+            if (!data.success) {
+                alert(i18n.ompassStartFail + ': ' + data.error);
+                resetStep1();
+                return;
+            }
+
+            const width = 500;
+            const height = 700;
+            const left = (screen.width - width) / 2;
+            const top = (screen.height - height) / 2;
+
+            ompassPopup = window.open(
+                data.ompassUrl,
+                'ompass-auth',
+                `width=${width},height=${height},left=${left},top=${top},scrollbars=yes,resizable=yes`
+            );
+
+            if (ompassPopup) {
+                showOmpassWaiting(username);
+            } else {
+                alert(i18n.popupBlocked);
+                resetStep1();
+            }
+        } catch (error) {
+            alert(error.message);
+            resetStep1();
+        }
+    }
+
+    function retryOmpassAuth() {
+        if (currentUsername) {
+            startOmpassAuth(currentUsername);
+        }
+    }
+
+    function showOmpassWaiting(username) {
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step-ompass').style.display = 'block';
+        document.getElementById('ompass-username').textContent = username;
+    }
+
+    function showPasswordStep(username) {
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').style.display = 'block';
+        document.getElementById('step2-username').textContent = username;
+        document.getElementById('password1').focus();
+
+        const nextBtn = document.querySelector('#step1 .btn-next');
+        nextBtn.textContent = i18n.next;
+        nextBtn.disabled = false;
+    }
+
+    function resetStep1() {
+        document.getElementById('step1').style.display = 'block';
+        document.getElementById('step2').style.display = 'none';
+        document.getElementById('step-ompass').style.display = 'none';
+        document.getElementById('username1').focus();
+        currentUsername = '';
+
+        const nextBtn = document.querySelector('#step1 .btn-next');
+        nextBtn.textContent = i18n.next;
+        nextBtn.disabled = false;
+    }
+
+    // Enter key handler
+    document.getElementById('username1').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            checkUserAndProceed();
+        }
+    });
+
+    // Form submit handler
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        const step1 = document.getElementById('step1');
+        if (step1.style.display !== 'none') {
+            e.preventDefault();
+            checkUserAndProceed();
+        }
+    });
+</script>
+
+</body>
+</html>

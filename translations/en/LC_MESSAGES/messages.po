@@ -1,0 +1,421 @@
+# English translations for DemoMail.
+msgid ""
+msgstr ""
+"Project-Id-Version: DemoMail 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language: en\n"
+"Language-Team: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Common
+msgid "common.demo.banner"
+msgstr "This is an OMPASS SDK integration example. Not a real service."
+
+msgid "common.login"
+msgstr "Login"
+
+msgid "common.register"
+msgstr "Sign Up"
+
+msgid "common.logout"
+msgstr "Logout"
+
+msgid "common.settings"
+msgstr "Settings"
+
+msgid "common.inbox"
+msgstr "Inbox"
+
+msgid "common.back"
+msgstr "Back"
+
+msgid "common.error"
+msgstr "An error occurred"
+
+# Index
+msgid "index.title"
+msgstr "DemoMail - OMPASS SDK Example"
+
+msgid "index.desc"
+msgstr "A demo webmail service with OMPASS SDK integration."
+
+# Login
+msgid "login.title"
+msgstr "Login - DemoMail"
+
+msgid "login.heading"
+msgstr "Login"
+
+msgid "login.step1.desc"
+msgstr "Enter your account username."
+
+msgid "login.username.label"
+msgstr "Username"
+
+msgid "login.username.placeholder"
+msgstr "Enter your username"
+
+msgid "login.next"
+msgstr "Next"
+
+msgid "login.checking"
+msgstr "Checking..."
+
+msgid "login.no.account"
+msgstr "Don't have an account?"
+
+msgid "login.step2.heading"
+msgstr "Enter Password"
+
+msgid "login.password.label"
+msgstr "Password"
+
+msgid "login.password.placeholder"
+msgstr "Enter your password"
+
+msgid "login.submit"
+msgstr "Login"
+
+msgid "login.back"
+msgstr "Back"
+
+msgid "login.ompass.heading"
+msgstr "OMPASS Authentication"
+
+msgid "login.ompass.waiting"
+msgstr "Please complete authentication in the OMPASS app"
+
+msgid "login.ompass.timeout"
+msgstr "Please authenticate within 5 minutes"
+
+msgid "login.ompass.retry"
+msgstr "Retry"
+
+msgid "login.ompass.cancel"
+msgstr "Cancel"
+
+msgid "login.error.username.required"
+msgstr "Please enter your username."
+
+msgid "login.error.credentials"
+msgstr "Invalid username or password."
+
+msgid "login.error.ompass.start"
+msgstr "Failed to start OMPASS authentication"
+
+msgid "login.error.popup.blocked"
+msgstr "Popup blocked. Please allow popups for this site."
+
+# Register
+msgid "register.title"
+msgstr "Sign Up - DemoMail"
+
+msgid "register.heading"
+msgstr "Sign Up"
+
+msgid "register.desc"
+msgstr "Create an account to get started."
+
+msgid "register.username.label"
+msgstr "Username"
+
+msgid "register.username.placeholder"
+msgstr "4-15 alphanumeric characters"
+
+msgid "register.email.label"
+msgstr "Email"
+
+msgid "register.email.placeholder"
+msgstr "example@email.com"
+
+msgid "register.name.label"
+msgstr "Name"
+
+msgid "register.name.placeholder"
+msgstr "Enter your name"
+
+msgid "register.password.label"
+msgstr "Password"
+
+msgid "register.password.placeholder"
+msgstr "8 or more characters"
+
+msgid "register.password.hint"
+msgstr "Must include letters and numbers, at least 8 characters."
+
+msgid "register.password.confirm.label"
+msgstr "Confirm Password"
+
+msgid "register.password.confirm.placeholder"
+msgstr "Re-enter your password"
+
+msgid "register.terms"
+msgstr "I agree to the Terms of Service and Privacy Policy."
+
+msgid "register.submit"
+msgstr "Sign Up"
+
+msgid "register.has.account"
+msgstr "Already have an account?"
+
+msgid "register.success"
+msgstr "Registration complete. Please log in."
+
+msgid "register.error.username.required"
+msgstr "Please enter a username."
+
+msgid "register.error.username.length"
+msgstr "Username must be 4-15 characters."
+
+msgid "register.error.username.pattern"
+msgstr "Username can only contain letters and numbers."
+
+msgid "register.error.email.required"
+msgstr "Please enter an email."
+
+msgid "register.error.email.format"
+msgstr "Please enter a valid email address."
+
+msgid "register.error.name.required"
+msgstr "Please enter your name."
+
+msgid "register.error.name.length"
+msgstr "Name must be 1-50 characters."
+
+msgid "register.error.password.required"
+msgstr "Please enter a password."
+
+msgid "register.error.password.length"
+msgstr "Password must be at least 8 characters."
+
+msgid "register.error.password.confirm.required"
+msgstr "Please confirm your password."
+
+msgid "register.error.password.mismatch"
+msgstr "Passwords do not match."
+
+msgid "register.error.terms"
+msgstr "Please agree to the terms."
+
+# Home (Inbox)
+msgid "home.title"
+msgstr "Inbox - DemoMail"
+
+msgid "home.compose"
+msgstr "Compose"
+
+msgid "home.sent"
+msgstr "Sent"
+
+msgid "home.drafts"
+msgstr "Drafts"
+
+msgid "home.trash"
+msgstr "Trash"
+
+msgid "home.select.all"
+msgstr "Select all"
+
+msgid "home.refresh"
+msgstr "Refresh"
+
+msgid "home.email.select"
+msgstr "Select email"
+
+msgid "home.email.star"
+msgstr "Star"
+
+msgid "home.email1.sender"
+msgstr "Jihyun Park"
+
+msgid "home.email1.subject"
+msgstr "Please join the meeting tomorrow at 10 AM - Q3 marketing strategy"
+
+msgid "home.email1.date"
+msgstr "Today"
+
+msgid "home.email2.sender"
+msgstr "Youngsoo Kim"
+
+msgid "home.email2.subject"
+msgstr "Re: Please confirm next week's meeting schedule"
+
+msgid "home.email2.date"
+msgstr "Today"
+
+msgid "home.email3.sender"
+msgstr "DemoMail Team"
+
+msgid "home.email3.subject"
+msgstr "Welcome to DemoMail!"
+
+msgid "home.email3.date"
+msgstr "Yesterday"
+
+msgid "home.email4.sender"
+msgstr "Jungmin Lee"
+
+msgid "home.email4.subject"
+msgstr "Project progress update - Phase 2 development complete"
+
+msgid "home.email4.date"
+msgstr "Mar 5"
+
+msgid "home.email5.sender"
+msgstr "Soojin Choi"
+
+msgid "home.email5.subject"
+msgstr "Workshop venue options for March - Please review"
+
+msgid "home.email5.date"
+msgstr "Mar 3"
+
+msgid "home.email6.sender"
+msgstr "Sangwoo Han"
+
+msgid "home.email6.subject"
+msgstr "Quote attached - Please review and respond"
+
+msgid "home.email6.date"
+msgstr "Feb 28"
+
+# Settings
+msgid "settings.title"
+msgstr "Settings - DemoMail"
+
+msgid "settings.heading"
+msgstr "Settings"
+
+msgid "settings.profile"
+msgstr "Account Info"
+
+msgid "settings.username"
+msgstr "Username"
+
+msgid "settings.name"
+msgstr "Name"
+
+msgid "settings.email"
+msgstr "Email"
+
+msgid "settings.last.login"
+msgstr "Last Login"
+
+msgid "settings.no.record"
+msgstr "No record"
+
+msgid "settings.ompass"
+msgstr "OMPASS Authentication"
+
+msgid "settings.ompass.status"
+msgstr "Status"
+
+msgid "settings.ompass.active"
+msgstr "Active"
+
+msgid "settings.ompass.inactive"
+msgstr "Not Registered"
+
+msgid "settings.ompass.register.info"
+msgstr "Register OMPASS to log in securely without a password."
+
+msgid "settings.ompass.register.desc"
+msgstr "Protect your account with FIDO2 biometric authentication."
+
+msgid "settings.ompass.register.btn"
+msgstr "Register OMPASS"
+
+msgid "settings.ompass.registered"
+msgstr "OMPASS is registered."
+
+msgid "settings.ompass.delete.btn"
+msgstr "Remove OMPASS"
+
+msgid "settings.ompass.delete.confirm"
+msgstr "Remove OMPASS registration?\nYou will need to use a password to log in."
+
+msgid "settings.loginMode"
+msgstr "Login Method"
+
+msgid "settings.loginMode.passwordless"
+msgstr "Passwordless"
+
+msgid "settings.loginMode.passwordless.desc"
+msgstr "Log in with the OMPASS app only, no password needed."
+
+msgid "settings.loginMode.2fa"
+msgstr "Two-Factor Auth (2FA)"
+
+msgid "settings.loginMode.2fa.desc"
+msgstr "Enter password first, then verify with the OMPASS app."
+
+msgid "settings.loginMode.changed.passwordless"
+msgstr "Changed to passwordless."
+
+msgid "settings.loginMode.changed.2fa"
+msgstr "Changed to two-factor authentication."
+
+msgid "settings.back.inbox"
+msgstr "\u2190 Back to Inbox"
+
+# OMPASS Auth page
+msgid "ompass.auth.title"
+msgstr "OMPASS Auth - DemoMail"
+
+msgid "ompass.auth.heading"
+msgstr "DemoMail OMPASS Auth"
+
+msgid "ompass.auth.message"
+msgstr "Please proceed with authentication in the OMPASS app."
+
+msgid "ompass.auth.auto.open"
+msgstr "The authentication popup will open automatically."
+
+msgid "ompass.auth.start"
+msgstr "Start OMPASS Auth"
+
+msgid "ompass.auth.reopen"
+msgstr "Reopen OMPASS Window"
+
+msgid "ompass.auth.cancel"
+msgstr "Cancel and go back"
+
+msgid "ompass.auth.popup.opened"
+msgstr "Authentication window opened. Please complete verification."
+
+msgid "ompass.auth.popup.blocked"
+msgstr "Popup blocked. Please allow popups for this site."
+
+# Auth callback
+msgid "callback.success"
+msgstr "Authentication successful!"
+
+msgid "callback.fail"
+msgstr "Authentication failed"
+
+# Flash messages used in Python code
+msgid "Username already exists"
+msgstr "Username already exists"
+
+msgid "Email already exists"
+msgstr "Email already exists"
+
+msgid "Registration complete. Please log in."
+msgstr "Registration complete. Please log in."
+
+msgid "Invalid username or password."
+msgstr "Invalid username or password."
+
+msgid "Cannot proceed with authentication."
+msgstr "Cannot proceed with authentication."
+
+msgid "Please log in first."
+msgstr "Please log in first."
+
+msgid "OMPASS is not registered."
+msgstr "OMPASS is not registered."

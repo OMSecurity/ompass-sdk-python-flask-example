@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('register.title') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- i18n data for JavaScript -->
+<div id="i18n-data" style="display:none"
+     data-username-required="{{ _('register.error.username.required') }}"
+     data-username-length="{{ _('register.error.username.length') }}"
+     data-username-format="{{ _('register.error.username.pattern') }}"
+     data-email-required="{{ _('register.error.email.required') }}"
+     data-email-format="{{ _('register.error.email.format') }}"
+     data-name-required="{{ _('register.error.name.required') }}"
+     data-name-length="{{ _('register.error.name.length') }}"
+     data-password-required="{{ _('register.error.password.required') }}"
+     data-password-length="{{ _('register.error.password.length') }}"
+     data-password-confirm-required="{{ _('register.error.password.confirm.required') }}"
+     data-password-confirm-mismatch="{{ _('register.error.password.mismatch') }}"
+     data-terms-required="{{ _('register.error.terms') }}">
+</div>
+
+<!-- DEMO Banner -->
+<div class="top-bar">
+    <div class="top-bar-inner">
+        <span class="demo-badge">DEMO</span>
+        <span>{{ _('common.demo.banner') }}</span>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="logo">
+            <span class="logo-text">DemoMail</span>
+        </a>
+        <nav class="header-nav">
+            <a href="/login" class="link">{{ _('common.login') }}</a>
+        </nav>
+        <div class="lang-switcher">
+            <a href="?lang=ko">한국어</a>
+            <a href="?lang=en">EN</a>
+            <a href="?lang=ja">日本語</a>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="container">
+
+        <div class="login-content-box" style="max-width: 480px; margin: 0 auto;">
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">{{ message }}</div>
+            {% endfor %}
+            {% endwith %}
+
+            <div class="form-header-row" style="text-align: center;">
+                <span class="logo-text" style="font-size: 28px;">DemoMail</span>
+                <h2 style="margin-top: 16px;">{{ _('register.heading') }}</h2>
+                <p class="form-desc">{{ _('register.desc') }}</p>
+            </div>
+
+            <form id="register-form" action="/register" method="post" class="login-form active" novalidate>
+
+                <div class="form-group">
+                    <label for="username"><span>{{ _('register.username.label') }}</span> <span class="required">*</span></label>
+                    <input type="text" id="username" name="username" placeholder="{{ _('register.username.placeholder') }}" autocomplete="username" required>
+                    <span class="field-error" id="username-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email"><span>{{ _('register.email.label') }}</span> <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="{{ _('register.email.placeholder') }}" autocomplete="email" required>
+                    <span class="field-error" id="email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="name"><span>{{ _('register.name.label') }}</span> <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="{{ _('register.name.placeholder') }}" autocomplete="name" required>
+                    <span class="field-error" id="name-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><span>{{ _('register.password.label') }}</span> <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" placeholder="{{ _('register.password.placeholder') }}" autocomplete="new-password" required>
+                    <p class="form-desc" style="margin-top: 4px; font-size: 12px;">{{ _('register.password.hint') }}</p>
+                    <span class="field-error" id="password-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password-confirm"><span>{{ _('register.password.confirm.label') }}</span> <span class="required">*</span></label>
+                    <input type="password" id="password-confirm" name="passwordConfirm" placeholder="{{ _('register.password.confirm.placeholder') }}" autocomplete="new-password" required>
+                    <span class="field-error" id="password-confirm-error"></span>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span><span>{{ _('register.terms') }}</span> <span class="required">*</span></span>
+                    </label>
+                    <span class="field-error" id="terms-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">{{ _('register.submit') }}</button>
+                </div>
+
+                <div class="form-links">
+                    <span>{{ _('register.has.account') }}</span>
+                    <a href="/login" class="link">{{ _('common.login') }}</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <p style="font-size: 12px; color: #80868b; text-align: center;">DemoMail - OMPASS SDK Example | &copy; 2025</p>
+    </div>
+</footer>
+
+<script>
+    const i18n = document.getElementById('i18n-data').dataset;
+
+    // Validation rules
+    function validateUsername(value) {
+        if (!value) return i18n.usernameRequired;
+        if (value.length < 4 || value.length > 15) return i18n.usernameLength;
+        if (!/^[a-zA-Z0-9]+$/.test(value)) return i18n.usernameFormat;
+        return '';
+    }
+
+    function validateEmail(value) {
+        if (!value) return i18n.emailRequired;
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return i18n.emailFormat;
+        return '';
+    }
+
+    function validateName(value) {
+        if (!value) return i18n.nameRequired;
+        if (value.length < 1 || value.length > 50) return i18n.nameLength;
+        return '';
+    }
+
+    function validatePassword(value) {
+        if (!value) return i18n.passwordRequired;
+        if (value.length < 8) return i18n.passwordLength;
+        return '';
+    }
+
+    function validatePasswordConfirm(value) {
+        const password = document.getElementById('password').value;
+        if (!value) return i18n.passwordConfirmRequired;
+        if (value !== password) return i18n.passwordConfirmMismatch;
+        return '';
+    }
+
+    // Show error for a field
+    function showFieldError(fieldId, errorMsg) {
+        const errorEl = document.getElementById(fieldId + '-error');
+        const inputEl = document.getElementById(fieldId);
+        if (errorMsg) {
+            errorEl.textContent = errorMsg;
+            errorEl.style.display = 'block';
+            inputEl.classList.add('input-error');
+        } else {
+            errorEl.textContent = '';
+            errorEl.style.display = 'none';
+            inputEl.classList.remove('input-error');
+        }
+    }
+
+    // Blur validation events
+    document.getElementById('username').addEventListener('blur', function() {
+        showFieldError('username', validateUsername(this.value.trim()));
+    });
+
+    document.getElementById('email').addEventListener('blur', function() {
+        showFieldError('email', validateEmail(this.value.trim()));
+    });
+
+    document.getElementById('name').addEventListener('blur', function() {
+        showFieldError('name', validateName(this.value.trim()));
+    });
+
+    document.getElementById('password').addEventListener('blur', function() {
+        showFieldError('password', validatePassword(this.value));
+    });
+
+    document.getElementById('password-confirm').addEventListener('blur', function() {
+        showFieldError('password-confirm', validatePasswordConfirm(this.value));
+    });
+
+    // Form submission validation
+    document.getElementById('register-form').addEventListener('submit', function(e) {
+        let hasError = false;
+
+        const usernameErr = validateUsername(document.getElementById('username').value.trim());
+        const emailErr = validateEmail(document.getElementById('email').value.trim());
+        const nameErr = validateName(document.getElementById('name').value.trim());
+        const passwordErr = validatePassword(document.getElementById('password').value);
+        const passwordConfirmErr = validatePasswordConfirm(document.getElementById('password-confirm').value);
+
+        showFieldError('username', usernameErr);
+        showFieldError('email', emailErr);
+        showFieldError('name', nameErr);
+        showFieldError('password', passwordErr);
+        showFieldError('password-confirm', passwordConfirmErr);
+
+        if (usernameErr || emailErr || nameErr || passwordErr || passwordConfirmErr) {
+            hasError = true;
+        }
+
+        // Terms checkbox
+        const termsEl = document.getElementById('terms');
+        const termsErrorEl = document.getElementById('terms-error');
+        if (!termsEl.checked) {
+            termsErrorEl.textContent = i18n.termsRequired;
+            termsErrorEl.style.display = 'block';
+            hasError = true;
+        } else {
+            termsErrorEl.textContent = '';
+            termsErrorEl.style.display = 'none';
+        }
+
+        if (hasError) {
+            e.preventDefault();
+        }
+    });
+</script>
+
+</body>
+</html>

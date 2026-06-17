@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _('settings.title') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- i18n data for JavaScript -->
+<div id="i18n-data" style="display:none"
+     data-mode-changed-passwordless="{{ _('settings.loginMode.changed.passwordless') }}"
+     data-mode-changed-2fa="{{ _('settings.loginMode.changed.2fa') }}"
+     data-ompass-delete-confirm="{{ _('settings.ompass.delete.confirm') }}">
+</div>
+
+<!-- DEMO Banner -->
+<div class="top-bar">
+    <div class="top-bar-inner">
+        <span class="demo-badge">DEMO</span>
+        <span>{{ _('common.demo.banner') }}</span>
+    </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/home" class="logo">
+            <span class="logo-text">DemoMail</span>
+        </a>
+        <nav class="header-nav">
+            <div class="header-right">
+                <span class="user-greeting">
+                    <strong>{{ user.name }}</strong>님
+                </span>
+                <a href="/home" class="link">{{ _('common.inbox') }}</a>
+                <a href="/logout" class="link">{{ _('common.logout') }}</a>
+            </div>
+        </nav>
+        <div class="lang-switcher">
+            <a href="?lang=ko">한국어</a>
+            <a href="?lang=en">EN</a>
+            <a href="?lang=ja">日本語</a>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="container">
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+
+        <div class="security-section">
+            <h2>{{ _('settings.heading') }}</h2>
+
+            <!-- Profile Info -->
+            <div class="profile-section">
+                <h3>{{ _('settings.profile') }}</h3>
+                <div class="profile-field">
+                    <span class="profile-label">{{ _('settings.username') }}</span>
+                    <span class="profile-value">{{ user.username }}</span>
+                </div>
+                <div class="profile-field">
+                    <span class="profile-label">{{ _('settings.name') }}</span>
+                    <span class="profile-value">{{ user.name }}</span>
+                </div>
+                <div class="profile-field">
+                    <span class="profile-label">{{ _('settings.email') }}</span>
+                    <span class="profile-value">{{ user.email }}</span>
+                </div>
+                <div class="profile-field">
+                    <span class="profile-label">{{ _('settings.last.login') }}</span>
+                    {% if user.last_login_at %}
+                    <span class="profile-value">{{ user.last_login_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                    {% else %}
+                    <span class="profile-value">{{ _('settings.no.record') }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- OMPASS Status -->
+            <div class="profile-section">
+                <h3>{{ _('settings.ompass') }}</h3>
+
+                <div class="ompass-status">
+                    <span class="profile-label">{{ _('settings.ompass.status') }}</span>
+                    {% if user.ompass_registered %}
+                    <span class="status-badge status-active">{{ _('settings.ompass.active') }}</span>
+                    {% else %}
+                    <span class="status-badge status-inactive">{{ _('settings.ompass.inactive') }}</span>
+                    {% endif %}
+                </div>
+
+                <!-- Not Registered -->
+                {% if not user.ompass_registered %}
+                <div>
+                    <div class="alert alert-info">
+                        <strong>{{ _('settings.ompass.register.info') }}</strong>
+                        <p>{{ _('settings.ompass.register.desc') }}</p>
+                    </div>
+                    <div class="action-buttons">
+                        <button type="button" id="register-ompass-btn" class="btn btn-ompass">{{ _('settings.ompass.register.btn') }}</button>
+                    </div>
+                    <p id="ompass-status" class="status-message"></p>
+                </div>
+                {% endif %}
+
+                <!-- Registered -->
+                {% if user.ompass_registered %}
+                <div>
+                    <div class="alert alert-success">
+                        <strong>{{ _('settings.ompass.registered') }}</strong>
+                    </div>
+
+                    <!-- Login Mode Selection -->
+                    <div class="profile-section" style="margin-top: 16px;">
+                        <h3>{{ _('settings.loginMode') }}</h3>
+                        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 12px;">
+                            <label style="display: flex; align-items: flex-start; gap: 10px; padding: 14px; border: 2px solid {{ '#1a73e8' if user.passwordless_enabled else '#dadce0' }}; border-radius: 8px; cursor: pointer;"
+                                   id="label-passwordless">
+                                <input type="radio" name="loginMode" value="passwordless"
+                                       {{ 'checked' if user.passwordless_enabled }}
+                                       onchange="toggleLoginMode(true)"
+                                       style="margin-top: 2px;">
+                                <div>
+                                    <strong>{{ _('settings.loginMode.passwordless') }}</strong>
+                                    <p style="font-size: 13px; color: #5f6368; margin-top: 4px;">{{ _('settings.loginMode.passwordless.desc') }}</p>
+                                </div>
+                            </label>
+                            <label style="display: flex; align-items: flex-start; gap: 10px; padding: 14px; border: 2px solid {{ '#dadce0' if user.passwordless_enabled else '#1a73e8' }}; border-radius: 8px; cursor: pointer;"
+                                   id="label-2fa">
+                                <input type="radio" name="loginMode" value="2fa"
+                                       {{ 'checked' if not user.passwordless_enabled }}
+                                       onchange="toggleLoginMode(false)"
+                                       style="margin-top: 2px;">
+                                <div>
+                                    <strong>{{ _('settings.loginMode.2fa') }}</strong>
+                                    <p style="font-size: 13px; color: #5f6368; margin-top: 4px;">{{ _('settings.loginMode.2fa.desc') }}</p>
+                                </div>
+                            </label>
+                        </div>
+                        <p id="mode-status" class="status-message"></p>
+                    </div>
+
+                    <div class="action-buttons" style="margin-top: 16px;">
+                        <button type="button" id="delete-ompass-btn" class="btn btn-secondary">{{ _('settings.ompass.delete.btn') }}</button>
+                    </div>
+                    <p id="delete-status" class="status-message"></p>
+                </div>
+                {% endif %}
+
+            </div>
+
+            <div style="margin-top: 24px;">
+                <a href="/home" class="link"><span>{{ _('settings.back.inbox') }}</span></a>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <p style="font-size: 12px; color: #80868b; text-align: center;">DemoMail - OMPASS SDK Example | &copy; 2025</p>
+    </div>
+</footer>
+
+<script>
+    const i18n = document.getElementById('i18n-data').dataset;
+    let ompassPopup = null;
+
+    async function toggleLoginMode(passwordless) {
+        const statusEl = document.getElementById('mode-status');
+        statusEl.textContent = '...';
+
+        try {
+            const formData = new FormData();
+            formData.append('enabled', passwordless);
+            const response = await fetch('/auth/toggle-passwordless', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                const labelPl = document.getElementById('label-passwordless');
+                const label2fa = document.getElementById('label-2fa');
+                labelPl.style.borderColor = passwordless ? '#1a73e8' : '#dadce0';
+                label2fa.style.borderColor = passwordless ? '#dadce0' : '#1a73e8';
+                statusEl.textContent = passwordless ? i18n.modeChangedPasswordless : i18n.modeChanged2fa;
+            } else {
+                statusEl.textContent = data.error;
+            }
+        } catch (error) {
+            statusEl.textContent = error.message;
+        }
+    }
+
+    document.getElementById('register-ompass-btn')?.addEventListener('click', async function() {
+        const statusEl = document.getElementById('ompass-status');
+        statusEl.textContent = '...';
+
+        try {
+            const response = await fetch('/auth/register-ompass', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+
+            if (!data.success) {
+                statusEl.textContent = data.error;
+                return;
+            }
+
+            const width = 500;
+            const height = 700;
+            const left = (screen.width - width) / 2;
+            const top = (screen.height - height) / 2;
+
+            ompassPopup = window.open(
+                data.ompassUrl,
+                'ompass-register',
+                `width=${width},height=${height},left=${left},top=${top},scrollbars=yes,resizable=yes`
+            );
+
+            if (ompassPopup) {
+                statusEl.textContent = '';
+            } else {
+                statusEl.textContent = '';
+            }
+        } catch (error) {
+            statusEl.textContent = error.message;
+        }
+    });
+
+    document.getElementById('delete-ompass-btn')?.addEventListener('click', async function() {
+        if (!confirm(i18n.ompassDeleteConfirm)) {
+            return;
+        }
+
+        const statusEl = document.getElementById('delete-status');
+        const btn = this;
+        btn.disabled = true;
+        statusEl.textContent = '...';
+
+        try {
+            const response = await fetch('/auth/delete-ompass', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                statusEl.textContent = '';
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                statusEl.textContent = data.error;
+                btn.disabled = false;
+            }
+        } catch (error) {
+            statusEl.textContent = error.message;
+            btn.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>

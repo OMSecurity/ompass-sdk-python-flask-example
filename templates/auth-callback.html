@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="{{ get_locale() }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('ompass.auth.title') }}</title>
+</head>
+<body>
+    {% if success %}
+    <p>{{ _('callback.success') }}</p>
+    {% else %}
+    <p>{{ error }}</p>
+    {% endif %}
+
+    <script>
+        const success = {{ success|tojson }};
+
+        if (window.opener) {
+            if (success) {
+                window.opener.location.href = '/home';
+            } else {
+                window.opener.location.href = '/login';
+            }
+            window.close();
+        } else {
+            if (success) {
+                window.location.href = '/home';
+            } else {
+                window.location.href = '/login';
+            }
+        }
+    </script>
+</body>
+</html>

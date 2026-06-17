@@ -1,0 +1,421 @@
+# Japanese translations for DemoMail.
+msgid ""
+msgstr ""
+"Project-Id-Version: DemoMail 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language: ja\n"
+"Language-Team: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Common
+msgid "common.demo.banner"
+msgstr "OMPASS SDK連携の例です。実際のサービスではありません。"
+
+msgid "common.login"
+msgstr "ログイン"
+
+msgid "common.register"
+msgstr "会員登録"
+
+msgid "common.logout"
+msgstr "ログアウト"
+
+msgid "common.settings"
+msgstr "設定"
+
+msgid "common.inbox"
+msgstr "受信トレイ"
+
+msgid "common.back"
+msgstr "戻る"
+
+msgid "common.error"
+msgstr "エラーが発生しました"
+
+# Index
+msgid "index.title"
+msgstr "DemoMail - OMPASS SDK Example"
+
+msgid "index.desc"
+msgstr "OMPASS SDK連携デモのウェブメールサービスです。"
+
+# Login
+msgid "login.title"
+msgstr "ログイン - DemoMail"
+
+msgid "login.heading"
+msgstr "ログイン"
+
+msgid "login.step1.desc"
+msgstr "アカウントIDを入力してください。"
+
+msgid "login.username.label"
+msgstr "ユーザーID"
+
+msgid "login.username.placeholder"
+msgstr "IDを入力してください"
+
+msgid "login.next"
+msgstr "次へ"
+
+msgid "login.checking"
+msgstr "確認中..."
+
+msgid "login.no.account"
+msgstr "アカウントをお持ちでないですか？"
+
+msgid "login.step2.heading"
+msgstr "パスワード入力"
+
+msgid "login.password.label"
+msgstr "パスワード"
+
+msgid "login.password.placeholder"
+msgstr "パスワードを入力してください"
+
+msgid "login.submit"
+msgstr "ログイン"
+
+msgid "login.back"
+msgstr "戻る"
+
+msgid "login.ompass.heading"
+msgstr "OMPASS認証"
+
+msgid "login.ompass.waiting"
+msgstr "OMPASSアプリで認証を完了してください"
+
+msgid "login.ompass.timeout"
+msgstr "5分以内に認証してください"
+
+msgid "login.ompass.retry"
+msgstr "再試行"
+
+msgid "login.ompass.cancel"
+msgstr "キャンセル"
+
+msgid "login.error.username.required"
+msgstr "IDを入力してください。"
+
+msgid "login.error.credentials"
+msgstr "IDまたはパスワードが正しくありません。"
+
+msgid "login.error.ompass.start"
+msgstr "OMPASS認証の開始に失敗しました"
+
+msgid "login.error.popup.blocked"
+msgstr "ポップアップがブロックされました。ポップアップを許可してください。"
+
+# Register
+msgid "register.title"
+msgstr "会員登録 - DemoMail"
+
+msgid "register.heading"
+msgstr "会員登録"
+
+msgid "register.desc"
+msgstr "アカウントを作成してサービスを始めましょう。"
+
+msgid "register.username.label"
+msgstr "ユーザーID"
+
+msgid "register.username.placeholder"
+msgstr "英数字4〜15文字"
+
+msgid "register.email.label"
+msgstr "メールアドレス"
+
+msgid "register.email.placeholder"
+msgstr "example@email.com"
+
+msgid "register.name.label"
+msgstr "名前"
+
+msgid "register.name.placeholder"
+msgstr "名前を入力してください"
+
+msgid "register.password.label"
+msgstr "パスワード"
+
+msgid "register.password.placeholder"
+msgstr "8文字以上"
+
+msgid "register.password.hint"
+msgstr "英字と数字を含む8文字以上で入力してください。"
+
+msgid "register.password.confirm.label"
+msgstr "パスワード確認"
+
+msgid "register.password.confirm.placeholder"
+msgstr "パスワードを再入力してください"
+
+msgid "register.terms"
+msgstr "利用規約およびプライバシーポリシーに同意します。"
+
+msgid "register.submit"
+msgstr "会員登録"
+
+msgid "register.has.account"
+msgstr "すでにアカウントをお持ちですか？"
+
+msgid "register.success"
+msgstr "会員登録が完了しました。ログインしてください。"
+
+msgid "register.error.username.required"
+msgstr "IDを入力してください。"
+
+msgid "register.error.username.length"
+msgstr "IDは4〜15文字で入力してください。"
+
+msgid "register.error.username.pattern"
+msgstr "IDは英字と数字のみ使用できます。"
+
+msgid "register.error.email.required"
+msgstr "メールアドレスを入力してください。"
+
+msgid "register.error.email.format"
+msgstr "正しいメール形式を入力してください。"
+
+msgid "register.error.name.required"
+msgstr "名前を入力してください。"
+
+msgid "register.error.name.length"
+msgstr "名前は1〜50文字で入力してください。"
+
+msgid "register.error.password.required"
+msgstr "パスワードを入力してください。"
+
+msgid "register.error.password.length"
+msgstr "パスワードは8文字以上にしてください。"
+
+msgid "register.error.password.confirm.required"
+msgstr "パスワード確認を入力してください。"
+
+msgid "register.error.password.mismatch"
+msgstr "パスワードが一致しません。"
+
+msgid "register.error.terms"
+msgstr "利用規約に同意してください。"
+
+# Home (Inbox)
+msgid "home.title"
+msgstr "受信トレイ - DemoMail"
+
+msgid "home.compose"
+msgstr "メール作成"
+
+msgid "home.sent"
+msgstr "送信済み"
+
+msgid "home.drafts"
+msgstr "下書き"
+
+msgid "home.trash"
+msgstr "ゴミ箱"
+
+msgid "home.select.all"
+msgstr "すべて選択"
+
+msgid "home.refresh"
+msgstr "更新"
+
+msgid "home.email.select"
+msgstr "メール選択"
+
+msgid "home.email.star"
+msgstr "スター"
+
+msgid "home.email1.sender"
+msgstr "田中花子"
+
+msgid "home.email1.subject"
+msgstr "明日午前10時のミーティングに参加お願いします - 第3四半期マーケティング戦略"
+
+msgid "home.email1.date"
+msgstr "今日"
+
+msgid "home.email2.sender"
+msgstr "佐藤太郎"
+
+msgid "home.email2.subject"
+msgstr "Re: 来週の会議スケジュール確認お願いします"
+
+msgid "home.email2.date"
+msgstr "今日"
+
+msgid "home.email3.sender"
+msgstr "DemoMailチーム"
+
+msgid "home.email3.subject"
+msgstr "DemoMailへようこそ！"
+
+msgid "home.email3.date"
+msgstr "昨日"
+
+msgid "home.email4.sender"
+msgstr "鈴木一郎"
+
+msgid "home.email4.subject"
+msgstr "プロジェクト進捗共有 - フェーズ2開発完了"
+
+msgid "home.email4.date"
+msgstr "3月5日"
+
+msgid "home.email5.sender"
+msgstr "高橋美咲"
+
+msgid "home.email5.subject"
+msgstr "3月ワークショップ会場候補をまとめました - ご確認ください"
+
+msgid "home.email5.date"
+msgstr "3月3日"
+
+msgid "home.email6.sender"
+msgstr "山田健太"
+
+msgid "home.email6.subject"
+msgstr "見積書を添付します - ご確認後ご返信ください"
+
+msgid "home.email6.date"
+msgstr "2月28日"
+
+# Settings
+msgid "settings.title"
+msgstr "設定 - DemoMail"
+
+msgid "settings.heading"
+msgstr "設定"
+
+msgid "settings.profile"
+msgstr "アカウント情報"
+
+msgid "settings.username"
+msgstr "ユーザーID"
+
+msgid "settings.name"
+msgstr "名前"
+
+msgid "settings.email"
+msgstr "メールアドレス"
+
+msgid "settings.last.login"
+msgstr "最終ログイン"
+
+msgid "settings.no.record"
+msgstr "記録なし"
+
+msgid "settings.ompass"
+msgstr "OMPASS認証"
+
+msgid "settings.ompass.status"
+msgstr "状態"
+
+msgid "settings.ompass.active"
+msgstr "使用中"
+
+msgid "settings.ompass.inactive"
+msgstr "未登録"
+
+msgid "settings.ompass.register.info"
+msgstr "OMPASSを登録するとパスワードなしで安全にログインできます。"
+
+msgid "settings.ompass.register.desc"
+msgstr "FIDO2国際標準の生体認証でアカウントを保護しましょう。"
+
+msgid "settings.ompass.register.btn"
+msgstr "OMPASSを登録"
+
+msgid "settings.ompass.registered"
+msgstr "OMPASSが登録されています。"
+
+msgid "settings.ompass.delete.btn"
+msgstr "OMPASS登録解除"
+
+msgid "settings.ompass.delete.confirm"
+msgstr "OMPASS登録を解除しますか？\n解除後はパスワードでログインする必要があります。"
+
+msgid "settings.loginMode"
+msgstr "ログイン方式"
+
+msgid "settings.loginMode.passwordless"
+msgstr "パスワードレス"
+
+msgid "settings.loginMode.passwordless.desc"
+msgstr "パスワードなしでOMPASSアプリのみでログインします。"
+
+msgid "settings.loginMode.2fa"
+msgstr "二段階認証（2FA）"
+
+msgid "settings.loginMode.2fa.desc"
+msgstr "パスワード入力後、OMPASSアプリで追加認証します。"
+
+msgid "settings.loginMode.changed.passwordless"
+msgstr "パスワードレスに変更しました。"
+
+msgid "settings.loginMode.changed.2fa"
+msgstr "二段階認証に変更しました。"
+
+msgid "settings.back.inbox"
+msgstr "← 受信トレイへ"
+
+# OMPASS Auth page
+msgid "ompass.auth.title"
+msgstr "OMPASS認証 - DemoMail"
+
+msgid "ompass.auth.heading"
+msgstr "DemoMail OMPASS認証"
+
+msgid "ompass.auth.message"
+msgstr "OMPASSアプリで認証を行ってください。"
+
+msgid "ompass.auth.auto.open"
+msgstr "認証ポップアップが自動で開きます。"
+
+msgid "ompass.auth.start"
+msgstr "OMPASS認証開始"
+
+msgid "ompass.auth.reopen"
+msgstr "OMPASSウィンドウを再度開く"
+
+msgid "ompass.auth.cancel"
+msgstr "キャンセルして戻る"
+
+msgid "ompass.auth.popup.opened"
+msgstr "認証ウィンドウが開きました。認証を完了してください。"
+
+msgid "ompass.auth.popup.blocked"
+msgstr "ポップアップがブロックされました。このサイトのポップアップを許可してください。"
+
+# Auth callback
+msgid "callback.success"
+msgstr "認証成功！"
+
+msgid "callback.fail"
+msgstr "認証失敗"
+
+# Flash messages used in Python code
+msgid "Username already exists"
+msgstr "すでに使用されているIDです"
+
+msgid "Email already exists"
+msgstr "すでに使用されているメールアドレスです"
+
+msgid "Registration complete. Please log in."
+msgstr "会員登録が完了しました。ログインしてください。"
+
+msgid "Invalid username or password."
+msgstr "IDまたはパスワードが正しくありません。"
+
+msgid "Cannot proceed with authentication."
+msgstr "認証を進めることができません。"
+
+msgid "Please log in first."
+msgstr "ログインが必要です。"
+
+msgid "OMPASS is not registered."
+msgstr "OMPASSが登録されていません。"
